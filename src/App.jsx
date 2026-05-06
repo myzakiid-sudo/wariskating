@@ -129,33 +129,34 @@ const FACULTIES = ["Semua", "FMIPA", "FT", "FK", "FILKOM", "FEB", "FH"];
 
 // ===================== STYLE CONSTANTS =====================
 const theme = {
-  primary: "#0F6FB8",
-  primaryLight: "#1B7ECC",
-  primaryBg: "#E0F0FF",
-  accent: "#FF8C00",
-  accentDark: "#E67E00",
-  text: "#1B1B2F",
-  textSub: "#6B7280",
-  bg: "#FAFAF8",
+  primary: "#0B6E6E",
+  primaryLight: "#159494",
+  primaryBg: "#E6F7F7",
+  accent: "#FF6B35",
+  accentDark: "#E4572E",
+  text: "#1A1D1F",
+  textSub: "#5E6A6E",
+  bg: "#F7F6F2",
   card: "#FFFFFF",
-  border: "#E5E7EB",
+  border: "#E6E2D8",
 };
 
 const style = {
   app: {
-    fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
-    background: theme.bg,
+    fontFamily: "'Sora', 'Segoe UI', sans-serif",
+    background: "transparent",
     minHeight: "100vh",
     color: theme.text,
   },
   // Header
   header: {
-    background: "#fff",
-    borderBottom: `2px solid ${theme.primaryBg}`,
+    background: "rgba(255,255,255,0.92)",
+    borderBottom: `1.5px solid ${theme.border}`,
     position: "sticky",
     top: 0,
     zIndex: 100,
     padding: "0 1rem",
+    backdropFilter: "blur(10px)",
   },
   headerInner: {
     maxWidth: 1100,
@@ -173,7 +174,7 @@ const style = {
     textDecoration: "none",
   },
   logoText: {
-    fontSize: "1.25rem",
+    fontSize: "1.2rem",
     fontWeight: 800,
     color: theme.primary,
     letterSpacing: "-0.03em",
@@ -188,35 +189,71 @@ const style = {
   searchWrap: { flex: 1, display: "flex", gap: "0.5rem" },
   searchInput: {
     flex: 1,
-    padding: "0.55rem 1rem",
-    borderRadius: 10,
+    padding: "0.6rem 1rem",
+    borderRadius: 12,
     border: `1.5px solid ${theme.border}`,
     fontSize: "0.9rem",
     outline: "none",
-    background: "#FAFAFA",
+    background: "#FFFEFB",
+    boxShadow: "0 1px 0 rgba(0,0,0,0.03)",
   },
   searchSelect: {
-    padding: "0.55rem 0.75rem",
-    borderRadius: 10,
+    padding: "0.6rem 0.75rem",
+    borderRadius: 12,
     border: `1.5px solid ${theme.border}`,
     fontSize: "0.85rem",
-    background: "#FAFAFA",
+    background: "#FFFEFB",
     cursor: "pointer",
   },
   searchBtn: {
-    padding: "0.55rem 1.25rem",
+    padding: "0.6rem 1.25rem",
     background: theme.primary,
     color: "#fff",
     border: "none",
-    borderRadius: 10,
+    borderRadius: 12,
     fontWeight: 700,
     cursor: "pointer",
     fontSize: "0.9rem",
   },
+  // Top Nav
+  topNav: {
+    position: "sticky",
+    top: 64,
+    zIndex: 90,
+    background: "rgba(255,255,255,0.92)",
+    borderBottom: `1.5px solid ${theme.border}`,
+    backdropFilter: "blur(8px)",
+  },
+  topNavInner: {
+    maxWidth: 1100,
+    margin: "0 auto",
+    padding: "0.6rem 1rem",
+    display: "flex",
+    gap: "0.6rem",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+  },
+  topNavBtn: (active) => ({
+    flex: 1,
+    minWidth: 120,
+    border: active ? `2px solid ${theme.primary}` : `1.5px solid ${theme.border}`,
+    background: active ? theme.primaryBg : "#fff",
+    color: active ? theme.primary : theme.textSub,
+    borderRadius: 14,
+    padding: "0.55rem 0.75rem",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.45rem",
+    fontWeight: active ? 800 : 600,
+    fontSize: "0.82rem",
+  }),
   // Hero
   hero: {
-    background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.primaryLight} 100%)`,
-    padding: "3rem 1rem 2rem",
+    background:
+      "radial-gradient(1200px 400px at 50% -10%, rgba(255,255,255,0.35), transparent 70%), linear-gradient(135deg, #0B6E6E 0%, #159494 100%)",
+    padding: "3.25rem 1rem 2.25rem",
     textAlign: "center",
   },
   heroTitle: {
@@ -1490,7 +1527,7 @@ function UserProfilePage({ onBack, onItemClick }) {
 }
 
 // ===================== BOTTOM NAV =====================
-function BottomNav({ page, setPage }) {
+function TopNav({ page, setPage }) {
   const tabs = [
     { key: "home", icon: "🏠", label: "Beranda" },
     { key: "rental", icon: "📋", label: "Sewa Saya" },
@@ -1498,57 +1535,19 @@ function BottomNav({ page, setPage }) {
     { key: "profile", icon: "👤", label: "Profil" },
   ];
   return (
-    <nav
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        background: "#fff",
-        borderTop: `2px solid ${theme.primaryBg}`,
-        display: "flex",
-        zIndex: 200,
-        boxShadow: "0 -4px 16px rgba(0,0,0,0.07)",
-      }}
-    >
-      {tabs.map((t) => (
-        <button
-          key={t.key}
-          onClick={() => setPage(t.key)}
-          style={{
-            flex: 1,
-            border: "none",
-            background: "none",
-            padding: "0.6rem 0.25rem 0.5rem",
-            cursor: "pointer",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "0.15rem",
-          }}
-        >
-          <span style={{ fontSize: "1.3rem" }}>{t.icon}</span>
-          <span
-            style={{
-              fontSize: "0.65rem",
-              fontWeight: page === t.key ? 800 : 500,
-              color: page === t.key ? theme.primary : theme.textSub,
-            }}
+    <nav style={style.topNav}>
+      <div style={style.topNavInner}>
+        {tabs.map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setPage(t.key)}
+            style={style.topNavBtn(page === t.key)}
           >
-            {t.label}
-          </span>
-          {page === t.key && (
-            <div
-              style={{
-                width: 4,
-                height: 4,
-                borderRadius: "50%",
-                background: theme.primary,
-              }}
-            />
-          )}
-        </button>
-      ))}
+            <span style={{ fontSize: "1rem" }}>{t.icon}</span>
+            <span>{t.label}</span>
+          </button>
+        ))}
+      </div>
     </nav>
   );
 }
@@ -1570,7 +1569,7 @@ export default function App() {
   return (
     <div style={style.app}>
       <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
       />
       <Header
@@ -1579,7 +1578,8 @@ export default function App() {
           setSelectedItem(null);
         }}
       />
-      <main style={{ paddingBottom: 72 }}>
+      <TopNav page={page} setPage={setPage} />
+      <main style={{ paddingBottom: 24 }}>
         {page === "home" && <HomePage onItemClick={handleItemClick} />}
         {page === "detail" && selectedItem && (
           <ProductDetailPage item={selectedItem} onBack={handleBack} />
@@ -1592,7 +1592,6 @@ export default function App() {
           <UserProfilePage onBack={handleBack} onItemClick={handleItemClick} />
         )}
       </main>
-      <BottomNav page={page} setPage={setPage} />
     </div>
   );
 }

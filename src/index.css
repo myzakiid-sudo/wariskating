@@ -1,0 +1,23 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background:
+		radial-gradient(1000px 500px at 10% -20%, rgba(21, 148, 148, 0.18), transparent 60%),
+		radial-gradient(900px 500px at 90% -10%, rgba(255, 107, 53, 0.16), transparent 65%),
+		#f7f6f2;
+	color: #1a1d1f;
+	font-family: "Sora", "Segoe UI", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+button {
+	font-family: inherit;
+}
